@@ -1,5 +1,2 @@
---output "%(title)s.%(ext)s"
---format bestvideo+bestaudio
---merge-output-format mp4
 https://youtu.be/vluQmktwhYo?si=5YI5BzQ6qb-71FAD
-.
+
