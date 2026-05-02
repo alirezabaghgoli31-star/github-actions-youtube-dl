@@ -8,17 +8,27 @@ jobs:
 
     permissions:
       contents: write
-      
+
     steps:
-      - name: Install yt-dlp
-  run: pip install yt-dlp
-  name: Download video
-  run: yt-dlp --config-location config.txt
+      - name: Clone repository
+        uses: actions/checkout@v4        
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install yt-dlp
+
+      - name: Download video
+        run: |
+          yt-dlp --config-location config.txt
+
+      - name: Git commit and push
+        run: |
           git config --local user.email "justjavac@gmail.com"
           git config --local user.name "迷渡"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git pull --rebase
-          ./bin/youtube-dl --config-location config.txt
+          git pull --rebase || echo "git pull failed, continuing"
           git add .
-          git commit -m "download youtube video"
+          git diff --cached --quiet || git commit -m "download youtube video"
           git push
