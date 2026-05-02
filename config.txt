@@ -1,12 +1,5 @@
---batch-file playlist.txt
 --output "%(title)s.%(ext)s"
---format bestvideo+bestaudio
+--format "bestvideo+bestaudio/best"
 --merge-output-format mp4
---continue
-# --write-description
-# --write-info-json
-# --write-thumbnail
-
-# --external-downloader bin/aria2c
-# --external-downloader-args '-c -x 16 -k 1M'
+https://www.youtube.com/watch?v=vluQmktwhYo
 
